@@ -75,10 +75,12 @@ public class ItemController {
 
         log.info("uploadFileName={}", uploadFileName);
 
+        //파일명 인코딩 처리
         String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
 
         return ResponseEntity.ok()
+                //브라우저에서 해당 파일을 여는 것이 아닌 다운로드 받기 위한 처리
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(resource);
     }
